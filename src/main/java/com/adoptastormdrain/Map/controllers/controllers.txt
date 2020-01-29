@@ -1,0 +1,7 @@
+******************************************************************
+The Controller folder holds all the rest endpoints
+for the app and returns the html page responses to
+the user. Please move any functional logic to the
+operations folder and call it within the rest endpoint.
+This will help keep the controllers clean and uncluttered.
+******************************************************************

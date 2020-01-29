@@ -1,0 +1,4 @@
+******************************************************************
+Repositories are what allow us to execute CURD sql with entities
+to the database tables.
+******************************************************************

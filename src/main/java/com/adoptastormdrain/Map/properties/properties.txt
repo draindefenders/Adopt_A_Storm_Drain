@@ -1,0 +1,6 @@
+******************************************************************
+If any properties are required place them in the
+properties class. Create a getter and retrieve it from
+here. this will provide one location to update the
+value should it change.
+******************************************************************

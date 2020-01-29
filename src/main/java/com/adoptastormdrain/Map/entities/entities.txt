@@ -1,0 +1,4 @@
+******************************************************************
+Entities are the java objects that we will preform
+CURD operations to the database tables with.
+******************************************************************
