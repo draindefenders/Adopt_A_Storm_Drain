@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>ArcGIS JavaScript Tutorials: Create a JavaScript starter app</title>
+    <style>
+      html, body, #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+    <link rel="stylesheet" href="https://js.arcgis.com/4.13/esri/themes/light/main.css">
+    <script src="https://js.arcgis.com/4.13/"></script>
+</head>
+<body>
+<div id="viewDiv"></div>
+</body>
+<script>
+  function setFeatureLayerFilter(expression) {
+     featureLayer.definitionExpression = expression;
+  }
+
+  require([
+      "esri/Map",
+      "esri/views/MapView",
+      "esri/layers/FeatureLayer"
+    ], function(Map, MapView, FeatureLayer) {
+
+    var map = new Map({
+      basemap: "streets"
+    });
+
+    var floodLayer = new FeatureLayer({
+      url: "https://maps.lafayettela.gov/arcgis/rest/services/Caching/Effective_FEMA_Floodzones/MapServer/0"
+    });
+    var catchbasinLayer = new FeatureLayer({
+      url: "https://maps.lafayettela.gov/arcgis/rest/services/EditableLayers/LCG_Inlet/MapServer/0"
+    });
+
+    map.add(floodLayer);
+    map.add(catchbasinLayer);
+
+    var view = new MapView({
+      container: "viewDiv",
+      map: map,
+      center: [-92.0303316, 30.2090094], // longitude, latitude
+      zoom: 13
+    });
+  });
+</script>
+</html>

@@ -1,0 +1,6 @@
+******************************************************************
+The operations folder are where we handle any logic
+needed in the app. the controller should call functions
+in this folder and the operations should call any
+services or utilities needed.
+******************************************************************

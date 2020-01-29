@@ -1,0 +1,5 @@
+******************************************************************
+Any logic that is generic enough to be abstracted
+from an operation.
+ie. jms messaging, email, 311 integration
+******************************************************************

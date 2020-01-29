@@ -1,0 +1,5 @@
+*****************************************************
+This folder is holds the core service objects.
+Will be used to check if the app is running and
+is able to connect to the database.
+*****************************************************
