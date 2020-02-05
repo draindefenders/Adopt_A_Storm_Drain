@@ -18,6 +18,11 @@ target/
 *.iws
 *.iml
 *.ipr
+.mvn
+mvnw
+mvnw.cmd
+Map.iml
+derby.log
 
 ### NetBeans ###
 /nbproject/private/
