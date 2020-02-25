@@ -3,7 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>ArcGIS JavaScript Tutorials: Create a JavaScript starter app</title>
+    <title>
+        Adopt A Storm Drain
+    </title>
     <style>
       html, body, #viewDiv {
         padding: 0;
@@ -12,11 +14,133 @@
         width: 100%;
       }
     </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://js.arcgis.com/4.13/esri/themes/light/main.css">
     <script src="https://js.arcgis.com/4.13/"></script>
 </head>
 <body>
-<div id="viewDiv"></div>
+    <div class="row" style="height:100%;display:inline">
+        <div class="sidebar" style="overflow: scroll;height: 100%;position: absolute;width: 25%;top: 0;left: 0;overflow-x: hidden;">
+            <div class="navbar navbar-default">
+                <a href="">
+                    <img alt="" title="" src="">
+                </a>
+                <button class="navbar-toggle" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="sidebar-content">
+                <div class="hidden-xs">
+                    <h3 class="text-center">
+                        adopted drain count
+                        <div class="small">
+                            Last updated edit next line to be dynamic
+                            <time datetime="2020-01-31T01:10:44Z" data-local="time" data-format="%B %e, %Y" title="January 30, 2020 at 7:10pm CST" data-localized="" aria-label="January 30, 2020">January 30, 2020</time>
+                        </div>
+                    </h3>
+                    <a class="details" data-target="#details" data-toggle="modal" href="">
+                        <button class="btn btn-block btn-primary" id="tagline">
+                            Drain Clearing Safety Tips and More
+                        </button>
+                    </a>
+                </div>
+                <div id="content">
+
+                    <iframe allowfullscreen="allowfullscreen" frameborder="0" src="https://www.youtube.com/embed/Z1Vjrx3IAH0" width="100%"></iframe>
+                    <form id="address_form" class="search-form" action="/address" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
+                        <input type="hidden" name="limit" id="limit" value="25">
+                        <input type="hidden" name="current_user_id" id="current_user_id">
+                        <fieldset class="form-group hidden">
+                            <label id="city_state_label" class="control-label" for="city_state">City</label>
+                            <select name="city_state" id="city_state" class="form-control"><option value="San Francisco, California" selected="selected">San Francisco, California</option></select>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <input type="search" name="address" id="address" placeholder="Address, Neighborhood" class="search-query form-control">
+                            <div class="help-block"></div>
+                        </fieldset>
+                        <fieldset class="form-actions">
+                            <input type="submit" name="commit" value="Find drains" class="btn btn-primary btn-block" data-disable-with="Find drains">
+                        </fieldset>
+                    </form>
+
+                    <a class="link btn btn-secondary" href="">
+                        Register / Sign in
+                    </a>
+
+                </div>
+                <div class="hidden visible-xs-block">
+                    <a class="details" data-target="#details" data-toggle="modal" href="#details">
+                        <button class="btn btn-block btn-primary" id="tagline">
+                            Drain Clearing Safety Tips and More
+                        </button>
+                    </a>
+                </div>
+                <div id="logos">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <a href="/"></a><a style="text-decoration: none;" href="" target="_blank"><button class="btn btn-primary btn-block" type="button">About Us</button></a>
+                        </div>
+                        <div class="col-xs-12">
+                            <a href="/"></a><a style="text-decoration: none;"  href=""><button class="btn btn-warning btn-block" type="button">Contact Us</button></a>
+                        </div>
+                    </div>
+                    <h2>Program Lead</h2>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <a href="" target="_blank">
+                                <img alt="" title="" class="puc" src="">
+                            </a>
+                        </div>
+                    </div>
+                    <h2>Project Partners</h2>
+                    <div class="row">
+                        <div class="col-xs-4 custom_img">
+                            <a href="">
+                                <img alt="" title="" class="dpw" src="">
+                            </a>
+                        </div>
+                        <div class="col-xs-4 custom_img">
+                            <a href="">
+                                <img alt="" title="" class="" src="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4 custom_img">
+                            <a href="">
+                                <img alt="" title="" class="cfsf" src="">
+                            </a>
+                        </div>
+                        <div class="col-xs-4 custom_img">
+                            <a href="">
+                                <img alt="" title="" class="cfa" src="">
+                            </a>
+                        </div>
+                        <div class="col-xs-4 custom_img">
+                            <a href="">
+                                <img alt="" title="" class="dt" src="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="viewDiv" style="height:100%;width:75%;float:right">
+            <div class="title">
+                Legend
+            </div>
+            <div class="show-hide">
+                <a href="#" id="toggleLegend">
+                    Hide
+                </a>
+            </div>
+            <div class="container-fluid legend-items">
+            </div>
+        </div>
+    </div>
 </body>
 <script>
   function setFeatureLayerFilter(expression) {

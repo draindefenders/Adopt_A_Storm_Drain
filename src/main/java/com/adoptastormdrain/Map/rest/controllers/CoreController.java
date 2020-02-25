@@ -1,4 +1,4 @@
-package com.adoptastormdrain.Map.controllers;
+package com.adoptastormdrain.Map.rest.controllers;
 
 import com.adoptastormdrain.Map.core.HealthCheck;
 import com.adoptastormdrain.Map.operations.HealthCheckOperation;
