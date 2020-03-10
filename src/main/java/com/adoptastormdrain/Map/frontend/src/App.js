@@ -11,13 +11,14 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-
+import OLMap from "./components/OLMap";
+import View from "ol/View";
 
 const drawerWidth = 400;
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: 'flex',
+    offset: theme.mixins.toolbar
   },
   appBar: {
     transition: theme.transitions.create(['margin', 'width'], {
@@ -32,9 +33,6 @@ const useStyles = makeStyles(theme => ({
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
   },
   hide: {
     display: 'none',
@@ -60,9 +58,9 @@ const useStyles = makeStyles(theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    marginRight: -drawerWidth,
   },
   contentShift: {
+    width: `calc(100% - ${drawerWidth}px)`,
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
@@ -71,7 +69,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function PersistentDrawerLeft() {
+export default function AdoptAStormDrain() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -85,7 +83,7 @@ export default function PersistentDrawerLeft() {
   };
 
   return (
-      <div className={classes.root}>
+      <div >
         <CssBaseline />
         <AppBar
             position="fixed"
@@ -125,19 +123,11 @@ export default function PersistentDrawerLeft() {
             </IconButton>
           </div>
           <Divider />
-
         </Drawer>
-        <main
-            className={clsx(classes.content, {
-              [classes.contentShift]: open,
-            })}
-        >
-          <div className={classes.drawerHeader} />
-          <Typography paragraph>
-            [Insert Map here]
-          </Typography>
-          
-        </main>
-      </div>
+          //render a second toolbar to offset the map
+        <Toolbar />
+        <OLMap />
+        </div>
+
   );
 }
