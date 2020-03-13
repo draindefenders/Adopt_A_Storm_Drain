@@ -15,6 +15,7 @@ import {
     MousePosition,
     defaults as DefaultControls
 } from 'ol/control';
+import Stamen from "ol/source/Stamen";
 
 // End Openlayers imports
 
@@ -39,7 +40,9 @@ class OLMap extends React.Component {
             ]),
             layers: [
                 new TileLayer({
-                    source: new OSM()
+                    source: new Stamen({
+                        layer: 'terrain'
+                    })
                 })
             ],
             controls: DefaultControls().extend([

@@ -2,7 +2,6 @@ import React from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -12,7 +11,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import OLMap from "./components/OLMap";
-import View from "ol/View";
 
 const drawerWidth = 400;
 
@@ -21,6 +19,7 @@ const useStyles = makeStyles(theme => ({
     offset: theme.mixins.toolbar
   },
   appBar: {
+    background: '#5077a8',
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -84,7 +83,6 @@ export default function AdoptAStormDrain() {
 
   return (
       <div >
-        <CssBaseline />
         <AppBar
             position="fixed"
             className={clsx(classes.appBar, {
@@ -93,7 +91,7 @@ export default function AdoptAStormDrain() {
         >
           <Toolbar style={{justifyContent: 'space-between'}}>
             <Typography variant="h6" noWrap>
-              Adopt A Storm Drain Lafayette
+              Adopt a Storm Drain Lafayette
             </Typography>
             <div >
               <IconButton
@@ -124,7 +122,7 @@ export default function AdoptAStormDrain() {
           </div>
           <Divider />
         </Drawer>
-        <Toolbar />
+         <Toolbar />
         <OLMap />
         </div>
 
