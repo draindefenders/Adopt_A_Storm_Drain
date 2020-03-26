@@ -1,5 +1,4 @@
 import React from 'react'
-import Grid from '@material-ui/core/Grid'
 
 // Start Openlayers imports
 import 'ol/ol.css';
@@ -8,7 +7,6 @@ import View from 'ol/View';
 import {fromLonLat} from 'ol/proj';
 import {defaults as defaultInteractions, DragRotateAndZoom} from 'ol/interaction';
 import TileLayer from 'ol/layer/Tile';
-import OSM from 'ol/source/OSM';
 import {
     ScaleLine,
     Zoom,
@@ -47,13 +45,13 @@ class OLMap extends React.Component {
             ],
             controls: DefaultControls().extend([
                 new Zoom(),
-                new MousePosition(),
+                //new MousePosition(),
                 new ScaleLine({units: 'us'})
             ]),
             target: 'map',
             view: new View({
                 center: fromLonLat([-92.02,30.22]),
-                zoom: 12
+                zoom: 12.5
             })
         });
     }
