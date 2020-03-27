@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -11,9 +11,16 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import OLMap from "./components/OLMap";
+import LoginFragment from "./components/LoginFragment";
+import SignUpFragment from "./components/SignUpFragment";
 
 const drawerWidth = 400;
+export const MyContext = React.createContext(null)
 
+const initialState = {
+  currentComponent: "Login",
+  loggedIn: false
+}
 const useStyles = makeStyles(theme => ({
   root: {
     offset: theme.mixins.toolbar
@@ -64,13 +71,38 @@ const useStyles = makeStyles(theme => ({
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
-    marginRight: 0,
+    container: {
+      flex:1,
+      flexDirection:'row',
+      alignItems:'center',
+      justifyContent:'center'
+    },
   },
 }));
+export const UPDATE_COMPONENT = 'UPDATE_COMPONENT';
+export const SET_LOGGED_IN = 'SET_LOGGED_IN';
+
+
+function reducer(state, action) {
+  switch (action.type) {
+    case UPDATE_COMPONENT:
+      return {
+        currentComponent: action.currentComponent
+      }
+    case SET_LOGGED_IN:
+      return {
+        loggedIn: action.loggedIn
+      }
+    default:
+      return initialState
+  }
+}
 
 export default function AdoptAStormDrain() {
   const classes = useStyles();
   const theme = useTheme();
+  const [user, dispatch] = useReducer(reducer, initialState);
+
   const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
@@ -80,9 +112,24 @@ export default function AdoptAStormDrain() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  const getComponent = () => {
+    let component;
+    switch (user.currentComponent){
+      case 'Login' :
+        component = <LoginFragment />;
+        break;
+      case 'SignUp' :
+        component = <SignUpFragment />;
+        break;
+      default:
+        component = <LoginFragment />;
+    }
+    return component;
+  };
 
   return (
       <div >
+        <MyContext.Provider value={{ user, dispatch }}>
         <AppBar
             position="fixed"
             className={clsx(classes.appBar, {
@@ -121,9 +168,13 @@ export default function AdoptAStormDrain() {
             </IconButton>
           </div>
           <Divider />
+          <div className={classes.container}>
+            {getComponent()}
+          </div>
         </Drawer>
          <Toolbar />
         <OLMap />
+        </MyContext.Provider>
         </div>
 
   );
