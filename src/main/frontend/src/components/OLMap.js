@@ -2,9 +2,11 @@ import React from 'react'
 
 // Start Openlayers imports
 import 'ol/ol.css';
+import '../css/popup.css';
 import Map from 'ol/Map';
 import View from 'ol/View';
-import {fromLonLat} from 'ol/proj';
+import Overlay from 'ol/Overlay';
+import {fromLonLat, toLonLat} from 'ol/proj';
 import {defaults as defaultInteractions, DragRotateAndZoom} from 'ol/interaction';
 import TileLayer from 'ol/layer/Tile';
 import {
@@ -15,7 +17,12 @@ import {
 } from 'ol/control';
 import Stamen from "ol/source/Stamen";
 
+
+import {toStringHDMS} from 'ol/coordinate';
+import TileJSON from 'ol/source/TileJSON';
+
 // End Openlayers imports
+
 
 class OLMap extends React.Component {
     constructor(props) {
@@ -27,11 +34,24 @@ class OLMap extends React.Component {
         const h = window.innerWidth >= 992 ? window.innerHeight-64 : window.innerHeight-64
         this.setState({height: h})
     }
+
     componentWillMount(){
-        window.addEventListener('resize', this.updateDimensions)
+        window.addEventListener('resize', this.updateDimensions())
         this.updateDimensions()
     }
     componentDidMount() {
+       this.container = document.getElementById('popup');
+       this.content = document.getElementById('popup-content');
+       this.closer = document.getElementById('popup-closer');
+
+       this.popup = new Overlay({
+            element: this.container.current,
+            autoPan: true,
+            autoPanAnimation: {
+                duration: 250
+            }
+       });
+
         this.map = new Map({
             interactions: defaultInteractions().extend([
                 new DragRotateAndZoom()
@@ -43,6 +63,7 @@ class OLMap extends React.Component {
                     })
                 })
             ],
+            overlays: [],
             controls: DefaultControls().extend([
                 new Zoom(),
                 //new MousePosition(),
@@ -54,6 +75,24 @@ class OLMap extends React.Component {
                 zoom: 12.5
             })
         });
+          this.marker = new Overlay({
+            positioning: "center-center",
+            element: document.getElementById("popup"),
+            stopEvent: false
+          });
+
+        this.map.on('dblclick', evt => {
+          this.marker.setPosition(evt.coordinate);
+          this.map.addOverlay(this.marker);
+          document.getElementById('popup').style.display = "block"
+          document.getElementById("popup-content").innerHTML = "Hello World!"
+        })
+
+    this.closer.onclick = function() {
+      console.log(this.marker);
+      document.getElementById('popup').style.display = "none"
+      return false;
+    };
     }
     componentWillUnmount(){
         window.removeEventListener('resize', this.updateDimensions)
@@ -65,8 +104,15 @@ class OLMap extends React.Component {
             backgroundColor: '#cccccc'
         }
         return (
-            <div id='map' style={style} >
+
+        <div>
+           <div id='map' style={style}>
             </div>
+            <div id="popup" class="ol-popup">
+               <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+               <div id="popup-content"></div>
+            </div>
+         </div>
         )
     }
 }
