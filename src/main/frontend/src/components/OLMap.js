@@ -75,24 +75,23 @@ class OLMap extends React.Component {
                 zoom: 12.5
             })
         });
-          this.marker = new Overlay({
-            positioning: "center-center",
-            element: document.getElementById("popup"),
-            stopEvent: false
-          });
+        this.popup = new Overlay({
+          positioning: "center-center",
+          element: document.getElementById("popup"),
+          stopEvent: false
+        });
 
         this.map.on('dblclick', evt => {
-          this.marker.setPosition(evt.coordinate);
-          this.map.addOverlay(this.marker);
+          this.popup.setPosition(evt.coordinate);
+          this.map.addOverlay(this.popup);
           document.getElementById('popup').style.display = "block"
-          document.getElementById("popup-content").innerHTML = "Hello World!"
+          document.getElementById("popup-content").innerHTML = "Hello World! \n Adopted by Nick"
         })
 
-    this.closer.onclick = function() {
-      console.log(this.marker);
-      document.getElementById('popup').style.display = "none"
-      return false;
-    };
+       this.closer.onclick = function() {
+         document.getElementById('popup').style.display = "none"
+         return false;
+       };
     }
     componentWillUnmount(){
         window.removeEventListener('resize', this.updateDimensions)
