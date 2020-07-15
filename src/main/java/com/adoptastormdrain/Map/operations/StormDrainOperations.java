@@ -1,7 +1,7 @@
 package com.adoptastormdrain.Map.operations;
 
-import com.adoptastormdrain.Map.entities.StormDrain;
-import com.adoptastormdrain.Map.repository.StormDrainRepository;
+import com.adoptastormdrain.Map.crud.entities.StormDrain;
+import com.adoptastormdrain.Map.crud.repository.StormDrainRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
