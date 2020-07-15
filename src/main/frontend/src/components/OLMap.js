@@ -16,6 +16,10 @@ import {
     defaults as DefaultControls
 } from 'ol/control';
 import Stamen from "ol/source/Stamen";
+import Feature from "ol/Feature";
+import Point from "ol/geom/Point";
+import MapPoints from "../scripts/MapPoints.js";
+
 
 
 import {toStringHDMS} from 'ol/coordinate';
@@ -25,11 +29,13 @@ import TileJSON from 'ol/source/TileJSON';
 
 
 class OLMap extends React.Component {
+
     constructor(props) {
         super(props)
         this.map = {};
-        this.updateDimensions = this.updateDimensions.bind(this)
+        this.updateDimensions = this.updateDimensions.bind(this);
     }
+
     updateDimensions(){
         const h = window.innerWidth >= 992 ? window.innerHeight-64 : window.innerHeight-64
         this.setState({height: h})
@@ -92,6 +98,7 @@ class OLMap extends React.Component {
          document.getElementById('popup').style.display = "none"
          return false;
        };
+        MapPoints();
     }
     componentWillUnmount(){
         window.removeEventListener('resize', this.updateDimensions)
@@ -102,6 +109,7 @@ class OLMap extends React.Component {
             height: this.state.height,
             backgroundColor: '#cccccc'
         }
+
         return (
 
         <div>
