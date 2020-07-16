@@ -84,9 +84,7 @@ function MapPoints() {
 });
     map.on('singleclick', function(evt) {
         if (map.hasFeatureAtPixel(evt.pixel)) {
-            map.getView().setCenter(transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326'));
-
-
+            //map.getView().setCenter(transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326'));
         }
     });
 }

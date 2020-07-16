@@ -16,14 +16,16 @@ import {
     defaults as DefaultControls
 } from 'ol/control';
 import Stamen from "ol/source/Stamen";
-import Feature from "ol/Feature";
-import Point from "ol/geom/Point";
 import MapPoints from "../scripts/MapPoints.js";
 
 
 
 import {toStringHDMS} from 'ol/coordinate';
 import TileJSON from 'ol/source/TileJSON';
+import Feature from "ol/Feature";
+import Point from "ol/geom/Point";
+
+
 
 // End Openlayers imports
 
