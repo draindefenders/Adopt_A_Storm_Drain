@@ -2,27 +2,20 @@ import React from 'react'
 
 // Start Openlayers imports
 import 'ol/ol.css';
-import Map from 'ol/Map';
-import View from 'ol/View';
-import {fromLonLat} from 'ol/proj';
-import {defaults as defaultInteractions, DragRotateAndZoom} from 'ol/interaction';
-import TileLayer from 'ol/layer/Tile';
-import {
-    ScaleLine,
-    Zoom,
-    MousePosition,
-    defaults as DefaultControls
-} from 'ol/control';
-import Stamen from "ol/source/Stamen";
+import Feature from "ol/Feature";
+import Point from "ol/geom/Point";
+import MapPoints from "../scripts/MapPoints.js";
 
 // End Openlayers imports
 
 class OLMap extends React.Component {
+
     constructor(props) {
         super(props)
         this.map = {};
-        this.updateDimensions = this.updateDimensions.bind(this)
+        this.updateDimensions = this.updateDimensions.bind(this);
     }
+
     updateDimensions(){
         const h = window.innerWidth >= 992 ? window.innerHeight-64 : window.innerHeight-64
         this.setState({height: h})
@@ -32,28 +25,7 @@ class OLMap extends React.Component {
         this.updateDimensions()
     }
     componentDidMount() {
-        this.map = new Map({
-            interactions: defaultInteractions().extend([
-                new DragRotateAndZoom()
-            ]),
-            layers: [
-                new TileLayer({
-                    source: new Stamen({
-                        layer: 'terrain'
-                    })
-                })
-            ],
-            controls: DefaultControls().extend([
-                new Zoom(),
-                //new MousePosition(),
-                new ScaleLine({units: 'us'})
-            ]),
-            target: 'map',
-            view: new View({
-                center: fromLonLat([-92.02,30.22]),
-                zoom: 12.5
-            })
-        });
+        MapPoints();
     }
     componentWillUnmount(){
         window.removeEventListener('resize', this.updateDimensions)
@@ -64,6 +36,7 @@ class OLMap extends React.Component {
             height: this.state.height,
             backgroundColor: '#cccccc'
         }
+
         return (
             <div id='map' style={style} >
             </div>
