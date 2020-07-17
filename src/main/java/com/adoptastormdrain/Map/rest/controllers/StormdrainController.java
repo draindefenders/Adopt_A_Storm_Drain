@@ -15,14 +15,16 @@ public class StormdrainController {
     @Autowired
     private StormDrainRepository stormDrainRepository;
 
-    @GetMapping("/")
-    public ResponseEntity<?> getAllStormDrains() {
+    @GetMapping
+    public ResponseEntity<?> getAllStormDrains()
+    {
         Iterable<StormDrain> stormDrains = stormDrainRepository.findAll();
         return RestControllerUtil.getResponse(stormDrains, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getSingleStormDrain(@PathVariable("id") long id) {
+    public ResponseEntity<?> getSingleStormDrain(@PathVariable("id") long id)
+    {
         StormDrain stormDrain = stormDrainRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Stormdrain Id:" + id));
 
@@ -33,8 +35,8 @@ public class StormdrainController {
     public ResponseEntity<?> updateStormDrain(@PathVariable("id") long id,
                                               @PathVariable("drainName") String drainName,
                                               @PathVariable("email") String email,
-                                              @PathVariable("drainStatus") String drainStatus) {
-
+                                              @PathVariable("drainStatus") String drainStatus)
+    {
         StormDrain stormDrain = stormDrainRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Stormdrain Id:" + id));
 
@@ -47,13 +49,13 @@ public class StormdrainController {
         return RestControllerUtil.getResponse(updatedStormDrain, HttpStatus.OK);
     }
 
-    @PutMapping("{/id}")
-    public ResponseEntity<?> createStormDrain(@PathVariable("latitude") Long latitude,
-                                              @PathVariable("longitude") Long longitude,
-                                              @PathVariable("drainName") String drainName,
-                                              @PathVariable("email") String email,
-                                              @PathVariable("drainStatus") String drainStatus) {
-
+    @PutMapping
+    public ResponseEntity<?> createStormDrain(@RequestParam("latitude") Double latitude,
+                                              @RequestParam("longitude") Double longitude,
+                                              @RequestParam("drainName") String drainName,
+                                              @RequestParam("email") String email,
+                                              @RequestParam("drainStatus") String drainStatus)
+    {
         StormDrain stormDrain = new StormDrain();
         stormDrain.setLatitude(latitude);
         stormDrain.setLongitude(longitude);

@@ -3,7 +3,6 @@ package com.adoptastormdrain.Map.crud.repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import com.adoptastormdrain.Map.crud.DAORepository;
 import com.adoptastormdrain.Map.crud.StormdrainDAORepository;
 import com.adoptastormdrain.Map.crud.entities.StormDrain;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class StormDrainRepositoryImpl extends DAORepository implements StormDrainRepository
+public class StormDrainRepositoryImpl implements StormDrainRepository
 {
     @Autowired
     private StormdrainDAORepository stormdrainDAORepository;
