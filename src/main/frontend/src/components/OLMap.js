@@ -88,12 +88,16 @@ class OLMap extends React.Component {
           element: document.getElementById("popup"),
           stopEvent: false
         });
-
-        this.map.on('dblclick', evt => {
-          this.popup.setPosition(evt.coordinate);
-          this.map.addOverlay(this.popup);
-          document.getElementById('popup').style.display = "block"
-          document.getElementById("popup-content").innerHTML = "Hello World! \n Adopted by Nick"
+        this.getPointData = function(coordinate){
+            return null;
+        }
+        this.map.on('click', evt => {
+          if (this.getPointData(evt.coordinate) != null){
+              this.popup.setPosition(evt.coordinate);
+              this.map.addOverlay(this.popup);
+              document.getElementById('popup').style.display = "block"
+              document.getElementById("popup-content").innerHTML = "Hello World! \n Adopted by Nick"
+          }
         })
 
        this.closer.onclick = function() {
