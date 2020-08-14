@@ -89,6 +89,10 @@ class OLMap extends React.Component {
           stopEvent: false
         });
         this.getPointData = function(coordinate){
+            /**
+                I thought maybe this would send the coordinates to a hashmap or a redis cache
+                preferably and return whatever json string for the popup and the sliding menu
+            **/
             return null;
         }
         this.map.on('click', evt => {
