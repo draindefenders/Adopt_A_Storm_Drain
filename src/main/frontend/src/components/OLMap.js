@@ -92,7 +92,8 @@ class OLMap extends React.Component {
             return null;
         }
         this.map.on('click', evt => {
-          if (this.getPointData(evt.coordinate) != null){
+        var pointData = this.getPointData(evt.coordinate)
+          if (pointData != null){
               this.popup.setPosition(evt.coordinate);
               this.map.addOverlay(this.popup);
               document.getElementById('popup').style.display = "block"
